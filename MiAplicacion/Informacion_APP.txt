@@ -1,0 +1,235 @@
+*****************************************************************************************
+Ubuntu 22.04
+*****************************************************************************************
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install net-tools
+ifconfig
+sudo ufw allow 3306
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 990
+sudo ufw allow 21
+sudo ufw allow 22
+
+*****************************************************************************************
+Instlacion MYSQL
+*****************************************************************************************
+
+Paso a Paso Instalacion
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
+
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+mysql -u root -p
+
+
+
+*****************************************************************************************
+Conector MySQL
+*****************************************************************************************
+
+
+1. Buscar en Google 
+
+Conector J
+(Descargar https://dev.mysql.com/downloads/connector/j/)
+Plataforma Independiente
+
+2. Descomprimir
+
+3. Ir a NetBeans - Pestaña Services
+
+- Click derecho en New Conection y adicionar la libreria de conexion y los datos
+
+4. Ir al proyecto Nuevo, Librerias y adicionar el J
+
+
+***************************************************************************************
+CREAR USUARIO BD - MYSQL
+***************************************************************************************
+
+CREATE USER 'politecnico'@'%' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'politecnico'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+***************************************************************************************
+BD
+***************************************************************************************
+
+-- Crear la base de datos
+CREATE DATABASE MiBaseDeDatos;
+
+-- Usar la base de datos
+USE MiBaseDeDatos;
+
+-- Crear la tabla para almacenar los datos
+CREATE TABLE Personas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    edad INT,
+    estado_civil VARCHAR(50)
+);
+
+-- Comentarios
+COMMENT ON DATABASE MiBaseDeDatos IS 'Base de datos para almacenar datos personales';
+COMMENT ON TABLE Personas IS 'Tabla para almacenar información de personas';
+COMMENT ON COLUMN Personas.id IS 'Identificador único de la persona';
+COMMENT ON COLUMN Personas.nombre IS 'Nombre de la persona';
+COMMENT ON COLUMN Personas.edad IS 'Edad de la persona';
+COMMENT ON COLUMN Personas.estado_civil IS 'Estado civil de la persona';
+
+
+****************************************************************************************
+CODIGO JAVA
+****************************************************************************************
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class MiAplicacion {
+
+    // Configuración de la base de datos
+    private static final String DB_URL = "jdbc:mysql://192.168.20.108/MiBaseDeDatos";
+    private static final String DB_USER = "politecnico";
+    private static final String DB_PASSWORD = "123456";
+
+    public static void main(String[] args) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Scanner scanner = new Scanner(System.in);
+            
+            while (true) {
+                System.out.println("| Politecnico Internacional |Programacion II | ");
+                System.out.println("Aplicacion GUS - Gestion de usuarios");
+                System.out.println("CRUD: Crear | Leer | Actualizar | Eliminar ");
+                System.out.println("1. Ingresar datos");
+                System.out.println("2. Eliminar datos");
+                System.out.println("3. Consultar datos");
+                System.out.println("4. Actualizar datos");
+                System.out.println("5. Salir");
+                System.out.print("Selecciona una opción: ");
+                int opcion = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcion) {
+                    case 1:
+                        ingresarDatos(connection, scanner);
+                        break;
+                    case 2:
+                        eliminarDatos(connection, scanner);
+                        break;
+                    case 3:
+                        consultarDatos(connection);
+                        break;
+                    case 4:
+                        actualizarDatos(connection, scanner);
+                        break;
+                    case 5:
+                        System.out.println("Gracias por tu visita.");
+                        System.out.println("Harol H. Torres Neuta - Harol.Torres@pi.edu.co");
+                        System.exit(0);
+                    default:
+                        System.out.println("Opción no válida. Inténtalo de nuevo.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void ingresarDatos(Connection connection, Scanner scanner) throws SQLException {
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Edad: ");
+        int edad = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Estado Civil: ");
+        String estadoCivil = scanner.nextLine();
+
+        String insertQuery = "INSERT INTO Personas (nombre, edad, estado_civil) VALUES (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+        preparedStatement.setString(1, nombre);
+        preparedStatement.setInt(2, edad);
+        preparedStatement.setString(3, estadoCivil);
+        preparedStatement.executeUpdate();
+        System.out.println("Datos ingresados con éxito.");
+    }
+
+    private static void eliminarDatos(Connection connection, Scanner scanner) throws SQLException {
+        System.out.print("ID de la persona a eliminar: ");
+        int id = scanner.nextInt();
+
+        String deleteQuery = "DELETE FROM Personas WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
+        preparedStatement.setInt(1, id);
+        int rowCount = preparedStatement.executeUpdate();
+        
+        if (rowCount > 0) {
+            System.out.println("Datos eliminados con éxito.");
+        } else {
+            System.out.println("No se encontró ninguna persona con ese ID.");
+        }
+    }
+
+    private static void consultarDatos(Connection connection) throws SQLException {
+        String selectQuery = "SELECT id, nombre, edad, estado_civil FROM Personas";
+        PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String nombre = resultSet.getString("nombre");
+            int edad = resultSet.getInt("edad");
+            String estadoCivil = resultSet.getString("estado_civil");
+            System.out.println("ID: " + id + ", Nombre: " + nombre + ", Edad: " + edad + ", Estado Civil: " + estadoCivil);
+        }
+    }
+
+    private static void actualizarDatos(Connection connection, Scanner scanner) throws SQLException {
+        System.out.print("ID de la persona a actualizar: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Nuevo Nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Nueva Edad: ");
+        int edad = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Nuevo Estado Civil: ");
+        String estadoCivil = scanner.nextLine();
+
+        String updateQuery = "UPDATE Personas SET nombre = ?, edad = ?, estado_civil = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+        preparedStatement.setString(1, nombre);
+        preparedStatement.setInt(2, edad);
+        preparedStatement.setString(3, estadoCivil);
+        preparedStatement.setInt(4, id);
+        int rowCount = preparedStatement.executeUpdate();
+
+        if (rowCount > 0) {
+            System.out.println("Datos actualizados con éxito.");
+        } else {
+            System.out.println("No se encontró ninguna persona con ese ID.");
+        }
+    }
+}
+
+****************************************************************************************
+CONFIGURACION ARCHIVO MYSQL
+****************************************************************************************
+
+sudo systemctl start mysql.service
+sudo apt install mysql-server
+
+
+sudo passwd root
+
+sudo more /var/log/mysql/error.log
+

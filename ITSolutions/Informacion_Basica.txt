@@ -1,0 +1,68 @@
+*****************************************************************************************
+Ubuntu 22.04
+*****************************************************************************************
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install net-tools
+ifconfig
+sudo ufw allow  3306
+sudo ufw allow  80
+sudo ufw allow  443
+sudo ufw allow  21
+sudo ufw allow  22
+sudo ufw allow  990
+
+*****************************************************************************************
+Instalacion MYSQL
+*****************************************************************************************
+
+Paso a Paso Instalacion
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
+
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+mysql -u root -p
+
+
+***************************************************************************************
+CREAR USUARIO BD - MYSQL
+***************************************************************************************
+
+
+CREATE USER 'politecnico'@'%' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'politecnico'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+
+*****************************************************************************************
+Conector MySQL
+*****************************************************************************************
+
+
+1. Buscar en Google 
+
+Conector J
+(Descargar https://dev.mysql.com/downloads/connector/j/)
+Plataforma Independiente
+
+2. Descomprimir
+
+3. Ir a NetBeans - Pestaña Services 
+
+- Click derecho en New Conection y adicionar la libreria de conexion y los datos
+
+4. Ir al proyecto Nuevo, Librerias y adicionar el J
+
+
+****************************************************************************************
+CONFIGURACION ARCHIVO MYSQL
+****************************************************************************************
+
+sudo systemctl start mysql.service
+sudo apt install mysql-server
+
+
+sudo passwd root
+sudo more /var/log/mysql/error.log
