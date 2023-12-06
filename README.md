@@ -16,3 +16,67 @@ Almacenar datos es un aspecto fundamental en la mayoría de las aplicaciones. Lo
 
 4. Ventajas de la integración:
 La integración de Java en NetBeans con MySQL ofrece ventajas como la flexibilidad y escalabilidad en el desarrollo de aplicaciones. Permite crear sistemas que pueden manejar grandes volúmenes de datos de manera eficiente, realizar consultas complejas y garantizar la seguridad de los datos. Además, el uso de un IDE como NetBeans simplifica el proceso de desarrollo al proporcionar herramientas de depuración, control de versiones y una interfaz intuitiva para crear aplicaciones con menos esfuerzo y en menos tiempo.
+
+***********************************************
+LAMP OFICIAL
+***********************************************
+
+1. Instructivo Official
+https://ubuntu.com/server/docs/lamp-applications
+
+2. Instructivo Official Servidor Web Apache
+https://ubuntu.com/server/docs/how-to-install-apache2
+
+3. Instructivo Official Instalacion PHP
+https://ubuntu.com/server/docs/programming-php
+
+4. Instructivo Official Instalacion PHPMYADMIN
+https://ubuntu.com/server/docs/how-to-install-and-configure-phpmyadmin
+
+***********************************************
+Instructivos LAMP
+***********************************************
+
+1. How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 20.04
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04
+
+2. How to Install LAMP in Ubuntu
+https://phoenixnap.com/kb/how-to-install-lamp-in-ubuntu
+
+3. How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 18.04
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04
+
+4. How To Install Linux, Apache, MySQL, PHP (LAMP) Stack on Ubuntu 22.04
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04
+
+***********************************************
+Instructivos Conexion PHP
+***********************************************
+
+1. Instructivo Official PHP - Conexion a la Base de Datos
+https://www.php.net/manual/es/mysqli.quickstart.connections.php
+
+2. Instructivo Official PHP - Ejecucion de Sentencias (CRUD)
+https://www.php.net/manual/es/mysqli.quickstart.statements.php
+
+3. Instructivo Officinal PHP - Ejecucion de Sentencias (CRUD)
+https://www.php.net/manual/es/mysqli.quickstart.prepared-statements.php
+
+4. Instructivo Official PHP -  Procedimientos Almacenados
+https://www.php.net/manual/es/mysqli.quickstart.stored-procedures.php
+
+5. Instructivo Official PHP - Sentencias Multiples
+https://www.php.net/manual/es/mysqli.quickstart.multiple-statement.php
+
+6. Instructivo Official PHP - Implementacion API
+https://www.php.net/manual/es/mysqli.quickstart.transactions.php
+
+7. Instructivo Official PHP - Metadatos.
+https://www.php.net/manual/es/mysqli.quickstart.metadata.php
+
+***********************************************
+Instructivo Official MYSQL
+***********************************************
+
+1. Instructivo Official MYSQL v8.0
+https://dev.mysql.com/doc/refman/8.0/en/
