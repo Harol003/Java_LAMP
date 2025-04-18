@@ -80,3 +80,11 @@ Instructivo Official MYSQL
 
 1. Instructivo Official MYSQL v8.0
 https://dev.mysql.com/doc/refman/8.0/en/
+
+***********************************************
+Politecnico2
+***********************************************
+
+1. Video de Explicacion de CRUD con Politecnico2
+https://youtu.be/Gz5GOZ1vIzA
+
